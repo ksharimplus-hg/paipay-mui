@@ -80,7 +80,7 @@ const ListTransaction = ({
 	dateStyle,
 	timeStyle,
 	attachStyle,
-	fullStyle,
+	fullStyle = [],
 	...rest
 }: Props) => {
 	return (
