@@ -51,6 +51,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 	receiptAttached?: any;
 	receiptOnClick?: any;
 	attachmentTitle?: any;
+	fullStyle?: any;
 };
 
 const ListTransaction = ({
@@ -79,13 +80,14 @@ const ListTransaction = ({
 	dateStyle,
 	timeStyle,
 	attachStyle,
+	fullStyle,
 	...rest
 }: Props) => {
 	return (
 		<TouchableRipple
 			key={key}
 			{...rest}
-			style={[vis.w100, vis.rowRl, vis.fc, vis.ac, vis.mb2]}
+			style={[vis.w100, vis.rowRl, vis.fc, vis.ac, vis.mb2, ...fullStyle]}
 			onPress={onPress}
 		>
 			<View
