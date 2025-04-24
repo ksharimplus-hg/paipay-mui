@@ -1,1 +1,1 @@
-{"version":3,"names":[],"sources":["react-app-env.d.ts"],"sourcesContent":["declare module '*.png';\ndeclare module '*.svg';\ndeclare module '*.jpeg';\ndeclare module '*.jpg';\n"],"mappings":""}
+{"version":3,"names":[],"sources":["react-app-env.d.ts"],"sourcesContent":["declare module '*.png';\r\ndeclare module '*.svg';\r\ndeclare module '*.jpeg';\r\ndeclare module '*.jpg';\r\n"],"mappings":""}

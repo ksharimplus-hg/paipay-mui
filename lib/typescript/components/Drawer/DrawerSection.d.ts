@@ -39,6 +39,9 @@ declare const _default: React.ComponentType<Pick<import("react-native").ViewProp
      */
     theme: InternalTheme;
 }, "title" | keyof import("react-native").ViewProps | keyof React.RefAttributes<View> | "showDivider"> & {
+    /**
+     * Whether to show `Divider` at the end of the section. True by default.
+     */
     theme?: import("@callstack/react-theme-provider").$DeepPartial<unknown> | undefined;
 }> & import("@callstack/react-theme-provider/typings/hoist-non-react-statics").NonReactStatics<React.ComponentType<import("react-native").ViewProps & React.RefAttributes<View> & {
     /**

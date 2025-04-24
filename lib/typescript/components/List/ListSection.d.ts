@@ -39,32 +39,7 @@ declare const _default: React.ComponentType<Pick<import("react-native").ViewProp
     titleStyle?: StyleProp<TextStyle>;
     style?: StyleProp<ViewStyle>;
 }, "title" | keyof import("react-native").ViewProps | keyof React.RefAttributes<View> | "titleStyle"> & {
-    theme?: import("@callstack/react-theme-provider").$DeepPartial<unknown> | undefined; /**
-     * A component used to group list items.
-     *
-     * <div class="screenshots">
-     *   <img src="screenshots/list-section.png" />
-     * </div>
-     *
-     * ## Usage
-     * ```js
-     * import * as React from 'react';
-     * import { List, MD3Colors } from 'react-native-paper';
-     *
-     * const MyComponent = () => (
-     *   <List.Section>
-     *     <List.Subheader>Some title</List.Subheader>
-     *     <List.Item title="First Item" left={() => <List.Icon icon="folder" />} />
-     *     <List.Item
-     *       title="Second Item"
-     *       left={() => <List.Icon color={MD3Colors.tertiary70} icon="folder" />}
-     *     />
-     *   </List.Section>
-     * );
-     *
-     * export default MyComponent;
-     * ```
-     */
+    theme?: import("@callstack/react-theme-provider").$DeepPartial<unknown> | undefined;
 }> & import("@callstack/react-theme-provider/typings/hoist-non-react-statics").NonReactStatics<React.ComponentType<import("react-native").ViewProps & React.RefAttributes<View> & {
     /**
      * Title text for the section.

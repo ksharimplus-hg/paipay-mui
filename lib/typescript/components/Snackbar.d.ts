@@ -72,9 +72,6 @@ declare const _default: React.ComponentType<Pick<Pick<import("./Surface").Props,
      */
     action?: (Omit<Pick<Pick<import("./Surface").Props, "theme" | "elevation" | keyof import("react-native").ViewProps | "key"> & React.RefAttributes<View> & {
         mode?: "text" | "outlined" | "elevated" | "contained" | "contained-tonal" | undefined;
-        /**
-         * The duration for which the Snackbar is shown.
-         */
         dark?: boolean | undefined;
         compact?: boolean | undefined;
         color?: string | undefined;
@@ -158,9 +155,6 @@ declare const _default: React.ComponentType<Pick<Pick<import("./Surface").Props,
      */
     action?: (Omit<Pick<Pick<import("./Surface").Props, "theme" | "elevation" | keyof import("react-native").ViewProps | "key"> & React.RefAttributes<View> & {
         mode?: "text" | "outlined" | "elevated" | "contained" | "contained-tonal" | undefined;
-        /**
-         * The duration for which the Snackbar is shown.
-         */
         dark?: boolean | undefined;
         compact?: boolean | undefined;
         color?: string | undefined;

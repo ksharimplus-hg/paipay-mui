@@ -49,7 +49,9 @@ declare const _default: React.ComponentType<Pick<Pick<Partial<import("react-nati
         top?: number | undefined;
         left?: number | undefined;
         right?: number | undefined;
-    } | undefined;
+    } | undefined; /**
+     * @optional
+     */
     theme: InternalTheme;
     style?: StyleProp<ViewStyle>;
 }, "dark" | keyof import("react-native").ViewProps | "mode" | keyof React.RefAttributes<View> | "elevated" | "safeAreaInsets"> & {
@@ -102,7 +104,9 @@ declare const _default: React.ComponentType<Pick<Pick<Partial<import("react-nati
         top?: number | undefined;
         left?: number | undefined;
         right?: number | undefined;
-    } | undefined;
+    } | undefined; /**
+     * @optional
+     */
     theme: InternalTheme;
     style?: StyleProp<ViewStyle>;
 }, "dark" | keyof import("react-native").ViewProps | "mode" | keyof React.RefAttributes<View> | "elevated" | "safeAreaInsets"> & {
@@ -158,7 +162,9 @@ declare const AppbarHeaderWithTheme: React.ComponentType<Pick<Pick<Partial<impor
         top?: number | undefined;
         left?: number | undefined;
         right?: number | undefined;
-    } | undefined;
+    } | undefined; /**
+     * @optional
+     */
     theme: InternalTheme;
     style?: StyleProp<ViewStyle>;
 }, "dark" | keyof import("react-native").ViewProps | "mode" | keyof React.RefAttributes<View> | "elevated" | "safeAreaInsets"> & {
@@ -211,7 +217,9 @@ declare const AppbarHeaderWithTheme: React.ComponentType<Pick<Pick<Partial<impor
         top?: number | undefined;
         left?: number | undefined;
         right?: number | undefined;
-    } | undefined;
+    } | undefined; /**
+     * @optional
+     */
     theme: InternalTheme;
     style?: StyleProp<ViewStyle>;
 }, "dark" | keyof import("react-native").ViewProps | "mode" | keyof React.RefAttributes<View> | "elevated" | "safeAreaInsets"> & {

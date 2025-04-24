@@ -1,565 +1,565 @@
 {
-  "name": "react-native-mui",
+  "name": "@rivkygafni/react-native-paper",
   "index": "lib/module/index.js",
   "mappings": {
     "MD3Colors": {
-      "path": "lib/module/styles/themes/v3/tokens",
+      "path": "lib\\module\\styles\\themes\\v3\\tokens",
       "name": "MD3Colors"
     },
     "useTheme": {
-      "path": "lib/module/core/theming",
+      "path": "lib\\module\\core\\theming",
       "name": "useTheme"
     },
     "withTheme": {
-      "path": "lib/module/core/theming",
+      "path": "lib\\module\\core\\theming",
       "name": "withTheme"
     },
     "ThemeProvider": {
-      "path": "lib/module/core/theming",
+      "path": "lib\\module\\core\\theming",
       "name": "ThemeProvider"
     },
     "DefaultTheme": {
-      "path": "lib/module/core/theming",
+      "path": "lib\\module\\core\\theming",
       "name": "DefaultTheme"
     },
     "adaptNavigationTheme": {
-      "path": "lib/module/core/theming",
+      "path": "lib\\module\\core\\theming",
       "name": "adaptNavigationTheme"
     },
     "Provider": {
-      "path": "lib/module/core/Provider",
+      "path": "lib\\module\\core\\Provider",
       "name": "default"
     },
     "shadow": {
-      "path": "lib/module/styles/shadow",
+      "path": "lib\\module\\styles\\shadow",
       "name": "default"
     },
     "overlay": {
-      "path": "lib/module/styles/overlay",
+      "path": "lib\\module\\styles\\overlay",
       "name": "default"
     },
     "configureFonts": {
-      "path": "lib/module/styles/fonts",
+      "path": "lib\\module\\styles\\fonts",
       "name": "default"
     },
     "vis": {
-      "path": "lib/module/styles/vis",
+      "path": "lib\\module\\styles\\vis",
       "name": "default"
     },
     "MD2Colors": {
-      "path": "lib/module/styles/themes/v2/colors",
+      "path": "lib\\module\\styles\\themes\\v2\\colors",
       "name": "*"
     },
     "Avatar": {
-      "path": "lib/module/components/Avatar/Avatar",
+      "path": "lib\\module\\components\\Avatar\\Avatar",
       "name": "*"
     },
     "List": {
-      "path": "lib/module/components/List/List",
+      "path": "lib\\module\\components\\List\\List",
       "name": "*"
     },
     "Drawer": {
-      "path": "lib/module/components/Drawer/Drawer",
+      "path": "lib\\module\\components\\Drawer\\Drawer",
       "name": "*"
     },
     "Badge": {
-      "path": "lib/module/components/Badge",
+      "path": "lib\\module\\components\\Badge",
       "name": "default"
     },
     "ActivityIndicator": {
-      "path": "lib/module/components/ActivityIndicator",
+      "path": "lib\\module\\components\\ActivityIndicator",
       "name": "default"
     },
     "Banner": {
-      "path": "lib/module/components/Banner",
+      "path": "lib\\module\\components\\Banner",
       "name": "default"
     },
     "BottomNavigation": {
-      "path": "lib/module/components/BottomNavigation/BottomNavigation",
+      "path": "lib\\module\\components\\BottomNavigation\\BottomNavigation",
       "name": "default"
     },
     "Button": {
-      "path": "lib/module/components/Button/Button",
+      "path": "lib\\module\\components\\Button\\Button",
       "name": "default"
     },
     "Card": {
-      "path": "lib/module/components/Card/Card",
+      "path": "lib\\module\\components\\Card\\Card",
       "name": "default"
     },
     "Checkbox": {
-      "path": "lib/module/components/Checkbox",
+      "path": "lib\\module\\components\\Checkbox",
       "name": "default"
     },
     "Chip": {
-      "path": "lib/module/components/Chip/Chip",
+      "path": "lib\\module\\components\\Chip\\Chip",
       "name": "default"
     },
     "DataTable": {
-      "path": "lib/module/components/DataTable/DataTable",
+      "path": "lib\\module\\components\\DataTable\\DataTable",
       "name": "default"
     },
     "Dialog": {
-      "path": "lib/module/components/Dialog/Dialog",
+      "path": "lib\\module\\components\\Dialog\\Dialog",
       "name": "default"
     },
     "Divider": {
-      "path": "lib/module/components/Divider",
+      "path": "lib\\module\\components\\Divider",
       "name": "default"
     },
     "FAB": {
-      "path": "lib/module/components/FAB",
+      "path": "lib\\module\\components\\FAB",
       "name": "default"
     },
     "AnimatedFAB": {
-      "path": "lib/module/components/FAB/AnimatedFAB",
+      "path": "lib\\module\\components\\FAB\\AnimatedFAB",
       "name": "default"
     },
     "HelperText": {
-      "path": "lib/module/components/HelperText",
+      "path": "lib\\module\\components\\HelperText",
       "name": "default"
     },
     "IconButton": {
-      "path": "lib/module/components/IconButton/IconButton",
+      "path": "lib\\module\\components\\IconButton\\IconButton",
       "name": "default"
     },
     "Menu": {
-      "path": "lib/module/components/Menu/Menu",
+      "path": "lib\\module\\components\\Menu\\Menu",
       "name": "default"
     },
     "Modal": {
-      "path": "lib/module/components/Modal",
+      "path": "lib\\module\\components\\Modal",
       "name": "default"
     },
     "Portal": {
-      "path": "lib/module/components/Portal/Portal",
+      "path": "lib\\module\\components\\Portal\\Portal",
       "name": "default"
     },
     "ProgressBar": {
-      "path": "lib/module/components/ProgressBar",
+      "path": "lib\\module\\components\\ProgressBar",
       "name": "default"
     },
     "RadioButton": {
-      "path": "lib/module/components/RadioButton",
+      "path": "lib\\module\\components\\RadioButton",
       "name": "default"
     },
     "Searchbar": {
-      "path": "lib/module/components/Searchbar",
+      "path": "lib\\module\\components\\Searchbar",
       "name": "default"
     },
     "Snackbar": {
-      "path": "lib/module/components/Snackbar",
+      "path": "lib\\module\\components\\Snackbar",
       "name": "default"
     },
     "Surface": {
-      "path": "lib/module/components/Surface",
+      "path": "lib\\module\\components\\Surface",
       "name": "default"
     },
     "Switch": {
-      "path": "lib/module/components/Switch/Switch",
+      "path": "lib\\module\\components\\Switch\\Switch",
       "name": "default"
     },
     "Appbar": {
-      "path": "lib/module/components/Appbar",
+      "path": "lib\\module\\components\\Appbar",
       "name": "default"
     },
     "TouchableRipple": {
-      "path": "lib/module/components/TouchableRipple/TouchableRipple",
+      "path": "lib\\module\\components\\TouchableRipple\\TouchableRipple",
       "name": "default"
     },
     "TextInput": {
-      "path": "lib/module/components/TextInput/TextInput",
+      "path": "lib\\module\\components\\TextInput\\TextInput",
       "name": "default"
     },
     "ToggleButton": {
-      "path": "lib/module/components/ToggleButton",
+      "path": "lib\\module\\components\\ToggleButton",
       "name": "default"
     },
     "SegmentedButtons": {
-      "path": "lib/module/components/SegmentedButtons/SegmentedButtons",
+      "path": "lib\\module\\components\\SegmentedButtons\\SegmentedButtons",
       "name": "default"
     },
     "Tooltip": {
-      "path": "lib/module/components/Tooltip/Tooltip",
+      "path": "lib\\module\\components\\Tooltip\\Tooltip",
       "name": "default"
     },
     "Caption": {
-      "path": "lib/module/components/Typography/v2",
+      "path": "lib\\module\\components\\Typography\\v2",
       "name": "Caption"
     },
     "Headline": {
-      "path": "lib/module/components/Typography/v2",
+      "path": "lib\\module\\components\\Typography\\v2",
       "name": "Headline"
     },
     "Paragraph": {
-      "path": "lib/module/components/Typography/v2",
+      "path": "lib\\module\\components\\Typography\\v2",
       "name": "Paragraph"
     },
     "Subheading": {
-      "path": "lib/module/components/Typography/v2",
+      "path": "lib\\module\\components\\Typography\\v2",
       "name": "Subheading"
     },
     "Title": {
-      "path": "lib/module/components/Typography/v2",
+      "path": "lib\\module\\components\\Typography\\v2",
       "name": "Title"
     },
     "Text": {
-      "path": "lib/module/components/Typography/Text",
+      "path": "lib\\module\\components\\Typography\\Text",
       "name": "default"
     },
     "ActivityIndicatorProps": {
-      "path": "lib/module/components/ActivityIndicator",
+      "path": "lib\\module\\components\\ActivityIndicator",
       "name": "Props"
     },
     "AnimatedFABProps": {
-      "path": "lib/module/components/FAB/AnimatedFAB",
+      "path": "lib\\module\\components\\FAB\\AnimatedFAB",
       "name": "Props"
     },
     "AppbarProps": {
-      "path": "lib/module/components/Appbar/Appbar",
+      "path": "lib\\module\\components\\Appbar\\Appbar",
       "name": "Props"
     },
     "AppbarActionProps": {
-      "path": "lib/module/components/Appbar/AppbarAction",
+      "path": "lib\\module\\components\\Appbar\\AppbarAction",
       "name": "Props"
     },
     "AppbarBackActionProps": {
-      "path": "lib/module/components/Appbar/AppbarBackAction",
+      "path": "lib\\module\\components\\Appbar\\AppbarBackAction",
       "name": "Props"
     },
     "AppbarContentProps": {
-      "path": "lib/module/components/Appbar/AppbarContent",
+      "path": "lib\\module\\components\\Appbar\\AppbarContent",
       "name": "Props"
     },
     "AppbarHeaderProps": {
-      "path": "lib/module/components/Appbar/AppbarHeader",
+      "path": "lib\\module\\components\\Appbar\\AppbarHeader",
       "name": "Props"
     },
     "AvatarIconProps": {
-      "path": "lib/module/components/Avatar/AvatarIcon",
+      "path": "lib\\module\\components\\Avatar\\AvatarIcon",
       "name": "Props"
     },
     "AvatarImageProps": {
-      "path": "lib/module/components/Avatar/AvatarImage",
+      "path": "lib\\module\\components\\Avatar\\AvatarImage",
       "name": "Props"
     },
     "AvatarTextProps": {
-      "path": "lib/module/components/Avatar/AvatarText",
+      "path": "lib\\module\\components\\Avatar\\AvatarText",
       "name": "Props"
     },
     "BadgeProps": {
-      "path": "lib/module/components/Badge",
+      "path": "lib\\module\\components\\Badge",
       "name": "Props"
     },
     "BannerProps": {
-      "path": "lib/module/components/Banner",
+      "path": "lib\\module\\components\\Banner",
       "name": "Props"
     },
     "BottomNavigationProps": {
-      "path": "lib/module/components/BottomNavigation/BottomNavigation",
+      "path": "lib\\module\\components\\BottomNavigation\\BottomNavigation",
       "name": "Props"
     },
     "ButtonProps": {
-      "path": "lib/module/components/Button/Button",
+      "path": "lib\\module\\components\\Button\\Button",
       "name": "Props"
     },
     "CardProps": {
-      "path": "lib/module/components/Card/Card",
+      "path": "lib\\module\\components\\Card\\Card",
       "name": "Props"
     },
     "CardActionsProps": {
-      "path": "lib/module/components/Card/CardActions",
+      "path": "lib\\module\\components\\Card\\CardActions",
       "name": "Props"
     },
     "CardContentProps": {
-      "path": "lib/module/components/Card/CardContent",
+      "path": "lib\\module\\components\\Card\\CardContent",
       "name": "Props"
     },
     "CardCoverProps": {
-      "path": "lib/module/components/Card/CardCover",
+      "path": "lib\\module\\components\\Card\\CardCover",
       "name": "Props"
     },
     "CardTitleProps": {
-      "path": "lib/module/components/Card/CardTitle",
+      "path": "lib\\module\\components\\Card\\CardTitle",
       "name": "Props"
     },
     "CheckboxProps": {
-      "path": "lib/module/components/Checkbox/Checkbox",
+      "path": "lib\\module\\components\\Checkbox\\Checkbox",
       "name": "Props"
     },
     "CheckboxAndroidProps": {
-      "path": "lib/module/components/Checkbox/CheckboxAndroid",
+      "path": "lib\\module\\components\\Checkbox\\CheckboxAndroid",
       "name": "Props"
     },
     "CheckboxIOSProps": {
-      "path": "lib/module/components/Checkbox/CheckboxIOS",
+      "path": "lib\\module\\components\\Checkbox\\CheckboxIOS",
       "name": "Props"
     },
     "CheckboxItemProps": {
-      "path": "lib/module/components/Checkbox/CheckboxItem",
+      "path": "lib\\module\\components\\Checkbox\\CheckboxItem",
       "name": "Props"
     },
     "ChipProps": {
-      "path": "lib/module/components/Chip/Chip",
+      "path": "lib\\module\\components\\Chip\\Chip",
       "name": "Props"
     },
     "DataTableProps": {
-      "path": "lib/module/components/DataTable/DataTable",
+      "path": "lib\\module\\components\\DataTable\\DataTable",
       "name": "Props"
     },
     "DataTableCellProps": {
-      "path": "lib/module/components/DataTable/DataTableCell",
+      "path": "lib\\module\\components\\DataTable\\DataTableCell",
       "name": "Props"
     },
     "DataTableHeaderProps": {
-      "path": "lib/module/components/DataTable/DataTableHeader",
+      "path": "lib\\module\\components\\DataTable\\DataTableHeader",
       "name": "Props"
     },
     "DataTablePaginationProps": {
-      "path": "lib/module/components/DataTable/DataTablePagination",
+      "path": "lib\\module\\components\\DataTable\\DataTablePagination",
       "name": "Props"
     },
     "DataTableRowProps": {
-      "path": "lib/module/components/DataTable/DataTableRow",
+      "path": "lib\\module\\components\\DataTable\\DataTableRow",
       "name": "Props"
     },
     "DataTableTitleProps": {
-      "path": "lib/module/components/DataTable/DataTableTitle",
+      "path": "lib\\module\\components\\DataTable\\DataTableTitle",
       "name": "Props"
     },
     "DialogProps": {
-      "path": "lib/module/components/Dialog/Dialog",
+      "path": "lib\\module\\components\\Dialog\\Dialog",
       "name": "Props"
     },
     "DialogActionsProps": {
-      "path": "lib/module/components/Dialog/DialogActions",
+      "path": "lib\\module\\components\\Dialog\\DialogActions",
       "name": "Props"
     },
     "DialogContentProps": {
-      "path": "lib/module/components/Dialog/DialogContent",
+      "path": "lib\\module\\components\\Dialog\\DialogContent",
       "name": "Props"
     },
     "DialogIconProps": {
-      "path": "lib/module/components/Dialog/DialogIcon",
+      "path": "lib\\module\\components\\Dialog\\DialogIcon",
       "name": "Props"
     },
     "DialogScrollAreaProps": {
-      "path": "lib/module/components/Dialog/DialogScrollArea",
+      "path": "lib\\module\\components\\Dialog\\DialogScrollArea",
       "name": "Props"
     },
     "DialogTitleProps": {
-      "path": "lib/module/components/Dialog/DialogTitle",
+      "path": "lib\\module\\components\\Dialog\\DialogTitle",
       "name": "Props"
     },
     "DividerProps": {
-      "path": "lib/module/components/Divider",
+      "path": "lib\\module\\components\\Divider",
       "name": "Props"
     },
     "DrawerCollapsedItemProps": {
-      "path": "lib/module/components/Drawer/DrawerCollapsedItem",
+      "path": "lib\\module\\components\\Drawer\\DrawerCollapsedItem",
       "name": "Props"
     },
     "DrawerItemProps": {
-      "path": "lib/module/components/Drawer/DrawerItem",
+      "path": "lib\\module\\components\\Drawer\\DrawerItem",
       "name": "Props"
     },
     "DrawerSectionProps": {
-      "path": "lib/module/components/Drawer/DrawerSection",
+      "path": "lib\\module\\components\\Drawer\\DrawerSection",
       "name": "Props"
     },
     "FABProps": {
-      "path": "lib/module/components/FAB/FAB",
+      "path": "lib\\module\\components\\FAB\\FAB",
       "name": "Props"
     },
     "FABGroupProps": {
-      "path": "lib/module/components/FAB/FABGroup",
+      "path": "lib\\module\\components\\FAB\\FABGroup",
       "name": "Props"
     },
     "HelperTextProps": {
-      "path": "lib/module/components/HelperText",
+      "path": "lib\\module\\components\\HelperText",
       "name": "Props"
     },
     "IconButtonProps": {
-      "path": "lib/module/components/IconButton/IconButton",
+      "path": "lib\\module\\components\\IconButton\\IconButton",
       "name": "Props"
     },
     "ListAccordionProps": {
-      "path": "lib/module/components/List/ListAccordion",
+      "path": "lib\\module\\components\\List\\ListAccordion",
       "name": "Props"
     },
     "ListAccordionGroupProps": {
-      "path": "lib/module/components/List/ListAccordionGroup",
+      "path": "lib\\module\\components\\List\\ListAccordionGroup",
       "name": "Props"
     },
     "ListIconProps": {
-      "path": "lib/module/components/List/ListIcon",
+      "path": "lib\\module\\components\\List\\ListIcon",
       "name": "Props"
     },
     "ListItemProps": {
-      "path": "lib/module/components/List/ListItem",
+      "path": "lib\\module\\components\\List\\ListItem",
       "name": "Props"
     },
     "ListTransactionProps": {
-      "path": "lib/module/components/List/ListTransaction",
+      "path": "lib\\module\\components\\List\\ListTransaction",
       "name": "Props"
     },
     "ListLastTransactionProps": {
-      "path": "lib/module/components/List/ListLastTransaction",
+      "path": "lib\\module\\components\\List\\ListLastTransaction",
       "name": "Props"
     },
     "ListSectionProps": {
-      "path": "lib/module/components/List/ListSection",
+      "path": "lib\\module\\components\\List\\ListSection",
       "name": "Props"
     },
     "ListSubheaderProps": {
-      "path": "lib/module/components/List/ListSubheader",
+      "path": "lib\\module\\components\\List\\ListSubheader",
       "name": "Props"
     },
     "ListPaymantTransactionProps": {
-      "path": "lib/module/components/List/ListPaymentTransaction",
+      "path": "lib\\module\\components\\List\\ListPaymentTransaction",
       "name": "Props"
     },
     "MenuProps": {
-      "path": "lib/module/components/Menu/Menu",
+      "path": "lib\\module\\components\\Menu\\Menu",
       "name": "Props"
     },
     "MenuItemProps": {
-      "path": "lib/module/components/Menu/MenuItem",
+      "path": "lib\\module\\components\\Menu\\MenuItem",
       "name": "Props"
     },
     "ModalProps": {
-      "path": "lib/module/components/Modal",
+      "path": "lib\\module\\components\\Modal",
       "name": "Props"
     },
     "PortalProps": {
-      "path": "lib/module/components/Portal/Portal",
+      "path": "lib\\module\\components\\Portal\\Portal",
       "name": "Props"
     },
     "PortalHostProps": {
-      "path": "lib/module/components/Portal/PortalHost",
+      "path": "lib\\module\\components\\Portal\\PortalHost",
       "name": "Props"
     },
     "ProgressBarProps": {
-      "path": "lib/module/components/ProgressBar",
+      "path": "lib\\module\\components\\ProgressBar",
       "name": "Props"
     },
     "ProviderProps": {
-      "path": "lib/module/core/Provider",
+      "path": "lib\\module\\core\\Provider",
       "name": "Props"
     },
     "RadioButtonProps": {
-      "path": "lib/module/components/RadioButton/RadioButton",
+      "path": "lib\\module\\components\\RadioButton\\RadioButton",
       "name": "Props"
     },
     "RadioButtonAndroidProps": {
-      "path": "lib/module/components/RadioButton/RadioButtonAndroid",
+      "path": "lib\\module\\components\\RadioButton\\RadioButtonAndroid",
       "name": "Props"
     },
     "RadioButtonGroupProps": {
-      "path": "lib/module/components/RadioButton/RadioButtonGroup",
+      "path": "lib\\module\\components\\RadioButton\\RadioButtonGroup",
       "name": "Props"
     },
     "RadioButtonIOSProps": {
-      "path": "lib/module/components/RadioButton/RadioButtonIOS",
+      "path": "lib\\module\\components\\RadioButton\\RadioButtonIOS",
       "name": "Props"
     },
     "RadioButtonItemProps": {
-      "path": "lib/module/components/RadioButton/RadioButtonItem",
+      "path": "lib\\module\\components\\RadioButton\\RadioButtonItem",
       "name": "Props"
     },
     "SearchbarProps": {
-      "path": "lib/module/components/Searchbar",
+      "path": "lib\\module\\components\\Searchbar",
       "name": "Props"
     },
     "SnackbarProps": {
-      "path": "lib/module/components/Snackbar",
+      "path": "lib\\module\\components\\Snackbar",
       "name": "Props"
     },
     "SurfaceProps": {
-      "path": "lib/module/components/Surface",
+      "path": "lib\\module\\components\\Surface",
       "name": "Props"
     },
     "SwitchProps": {
-      "path": "lib/module/components/Switch/Switch",
+      "path": "lib\\module\\components\\Switch\\Switch",
       "name": "Props"
     },
     "TextInputProps": {
-      "path": "lib/module/components/TextInput/TextInput",
+      "path": "lib\\module\\components\\TextInput\\TextInput",
       "name": "Props"
     },
     "TextInputAffixProps": {
-      "path": "lib/module/components/TextInput/Adornment/TextInputAffix",
+      "path": "lib\\module\\components\\TextInput\\Adornment\\TextInputAffix",
       "name": "Props"
     },
     "TextInputIconProps": {
-      "path": "lib/module/components/TextInput/Adornment/TextInputIcon",
+      "path": "lib\\module\\components\\TextInput\\Adornment\\TextInputIcon",
       "name": "Props"
     },
     "ToggleButtonProps": {
-      "path": "lib/module/components/ToggleButton/ToggleButton",
+      "path": "lib\\module\\components\\ToggleButton\\ToggleButton",
       "name": "Props"
     },
     "ToggleButtonGroupProps": {
-      "path": "lib/module/components/ToggleButton/ToggleButtonGroup",
+      "path": "lib\\module\\components\\ToggleButton\\ToggleButtonGroup",
       "name": "Props"
     },
     "ToggleButtonRowProps": {
-      "path": "lib/module/components/ToggleButton/ToggleButtonRow",
+      "path": "lib\\module\\components\\ToggleButton\\ToggleButtonRow",
       "name": "Props"
     },
     "TouchableRippleProps": {
-      "path": "lib/module/components/TouchableRipple/TouchableRipple",
+      "path": "lib\\module\\components\\TouchableRipple\\TouchableRipple",
       "name": "Props"
     },
     "CaptionProps": {
-      "path": "lib/module/components/Typography/v2/Caption",
+      "path": "lib\\module\\components\\Typography\\v2\\Caption",
       "name": "Props"
     },
     "HeadlineProps": {
-      "path": "lib/module/components/Typography/v2/Headline",
+      "path": "lib\\module\\components\\Typography\\v2\\Headline",
       "name": "Props"
     },
     "ParagraphProps": {
-      "path": "lib/module/components/Typography/v2/Paragraph",
+      "path": "lib\\module\\components\\Typography\\v2\\Paragraph",
       "name": "Props"
     },
     "SubheadingProps": {
-      "path": "lib/module/components/Typography/v2/Subheading",
+      "path": "lib\\module\\components\\Typography\\v2\\Subheading",
       "name": "Props"
     },
     "TitleProps": {
-      "path": "lib/module/components/Typography/v2/Title",
+      "path": "lib\\module\\components\\Typography\\v2\\Title",
       "name": "Props"
     },
     "TextProps": {
-      "path": "lib/module/components/Typography/Text",
+      "path": "lib\\module\\components\\Typography\\Text",
       "name": "Props"
     },
     "SegmentedButtonsProps": {
-      "path": "lib/module/components/SegmentedButtons/SegmentedButtons",
+      "path": "lib\\module\\components\\SegmentedButtons\\SegmentedButtons",
       "name": "Props"
     },
     "ListImageProps": {
-      "path": "lib/module/components/List/ListImage",
+      "path": "lib\\module\\components\\List\\ListImage",
       "name": "Props"
     },
     "TooltipProps": {
-      "path": "lib/module/components/Tooltip/Tooltip",
+      "path": "lib\\module\\components\\Tooltip\\Tooltip",
       "name": "Props"
     },
     "MD2Theme": {
-      "path": "lib/module/types",
+      "path": "lib\\module\\types",
       "name": "MD2Theme"
     },
     "MD3Theme": {
-      "path": "lib/module/types",
+      "path": "lib\\module\\types",
       "name": "MD3Theme"
     },
     "ThemeBase": {
-      "path": "lib/module/types",
+      "path": "lib\\module\\types",
       "name": "ThemeBase"
     },
     "MD3Elevation": {
-      "path": "lib/module/types",
+      "path": "lib\\module\\types",
       "name": "MD3Elevation"
     }
   }
