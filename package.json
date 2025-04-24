@@ -1,5 +1,5 @@
 {
-  "name": "@rivkygafni/react-native-paper",
+  "name": "react-native-mui",
   "version": "5.1.4",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
@@ -15,14 +15,14 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/RivkyGafni/react-native-paper.git"
+    "url": "https://github.com/callstack/react-native-mui.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RivkyGafni/react-native-paper/issues"
+    "url": "https://github.com/callstack/react-native-mui/issues"
   },
-  "homepage": "https://github.com/RivkyGafni/react-native-paper#readme",
+  "homepage": "https://callstack.github.io/react-native-mui",
   "keywords": [
     "android",
     "ios",
@@ -43,7 +43,7 @@
     "example": "yarn --cwd example"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.8",
