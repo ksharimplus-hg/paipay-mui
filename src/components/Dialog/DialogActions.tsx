@@ -1,24 +1,25 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
+import { DialogActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
-	/**
-	 * Content of the `DialogActions`.
-	 */
-	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+  /**
+   * Content of the `DialogActions`.
+   */
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
  * A component to show a list of actions in a Dialog.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/dialog-actions.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -46,46 +47,49 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DialogActions = (props: Props) => {
-	const { isV3 } = useInternalTheme();
-	const actionsLength = React.Children.toArray(props.children).length;
+  const { isV3 } = useInternalTheme(props.theme);
+  const actionsLength = React.Children.toArray(props.children).length;
 
-	return (
-		<View
-			{...props}
-			style={[isV3 ? styles.v3Container : styles.container, props.style]}
-		>
-			{React.Children.map(props.children, (child, i) =>
-				React.isValidElement(child)
-					? React.cloneElement(child as React.ReactElement<any>, {
-							compact: true,
-							uppercase: !isV3,
-							style: isV3 && {
-								paddingRight: i + 1 === actionsLength ? 0 : 8,
-							},
-					  })
-					: child
-			)}
-		</View>
-	);
+  return (
+    <View
+      {...props}
+      style={[isV3 ? styles.v3Container : styles.container, props.style]}
+    >
+      {React.Children.map(props.children, (child, i) =>
+        React.isValidElement<DialogActionChildProps>(child)
+          ? React.cloneElement(child, {
+              compact: true,
+              uppercase: !isV3,
+              style: [
+                isV3 && {
+                  marginRight: i + 1 === actionsLength ? 0 : 8,
+                },
+                child.props.style,
+              ],
+            })
+          : child
+      )}
+    </View>
+  );
 };
 
 DialogActions.displayName = 'Dialog.Actions';
 
 const styles = StyleSheet.create({
-	container: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		padding: 8,
-	},
-	v3Container: {
-		flexDirection: 'row',
-		flexGrow: 1,
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		paddingBottom: 24,
-		paddingHorizontal: 24,
-	},
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: 8,
+  },
+  v3Container: {
+    flexDirection: 'row',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 24,
+    paddingHorizontal: 24,
+  },
 });
 
 export default DialogActions;

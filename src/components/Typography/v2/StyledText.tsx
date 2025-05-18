@@ -8,49 +8,49 @@ import Text from './Text';
 import { useInternalTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof Text> & {
-	alpha?: number;
-	family: 'regular' | 'medium' | 'light' | 'thin';
-	style?: StyleProp<TextStyle>;
-	theme?: ThemeProp;
+  alpha?: number;
+  family: 'regular' | 'medium' | 'light' | 'thin';
+  style?: StyleProp<TextStyle>;
+  theme?: ThemeProp;
 };
 
 const StyledText = ({
-	alpha = 1,
-	family,
-	style,
-	theme: themeOverrides,
-	...rest
+  alpha = 1,
+  family,
+  style,
+  theme: themeOverrides,
+  ...rest
 }: Props) => {
-	const theme = useInternalTheme(themeOverrides);
+  const theme = useInternalTheme(themeOverrides);
 
-	const textColor = color(
-		theme.isV3 ? theme.colors.onSurface : theme.colors?.text
-	)
-		.alpha(alpha)
-		.rgb()
-		.string();
-	const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+  const textColor = color(
+    theme.isV3 ? theme.colors.onSurface : theme.colors?.text
+  )
+    .alpha(alpha)
+    .rgb()
+    .string();
+  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
-	return (
-		<Text
-			{...rest}
-			style={[
-				styles.text,
-				{
-					color: textColor,
-					...(!theme.isV3 && theme.fonts?.[family]),
-					writingDirection,
-				},
-				style,
-			]}
-		/>
-	);
+  return (
+    <Text
+      {...rest}
+      style={[
+        styles.text,
+        {
+          color: textColor,
+          ...(!theme.isV3 && theme.fonts?.[family]),
+          writingDirection,
+        },
+        style,
+      ]}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
-	text: {
-		textAlign: 'left',
-	},
+  text: {
+    textAlign: 'left',
+  },
 });
 
 export default StyledText;

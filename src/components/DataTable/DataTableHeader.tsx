@@ -3,31 +3,24 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import type { ThemeProp } from '../../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
-	/**
-	 * Content of the `DataTableHeader`.
-	 */
-	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
-	/**
-	 * @optional
-	 */
-	theme: InternalTheme;
+  /**
+   * Content of the `DataTableHeader`.
+   */
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
  * A component to display title in table header.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-header.png" />
- *   </figure>
- * </div>
- *
  *
  * ## Usage
  * ```js
@@ -52,33 +45,38 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 
-const DataTableHeader = ({ children, style, theme, ...rest }: Props) => {
-	const borderBottomColor = theme.isV3
-		? theme.colors.surfaceVariant
-		: color(theme.dark ? white : black)
-				.alpha(0.12)
-				.rgb()
-				.string();
+const DataTableHeader = ({
+  children,
+  style,
+  theme: themeOverrides,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const borderBottomColor = theme.isV3
+    ? theme.colors.surfaceVariant
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
 
-	return (
-		<View {...rest} style={[styles.header, { borderBottomColor }, style]}>
-			{children}
-		</View>
-	);
+  return (
+    <View {...rest} style={[styles.header, { borderBottomColor }, style]}>
+      {children}
+    </View>
+  );
 };
 
 DataTableHeader.displayName = 'DataTable.Header';
 
 const styles = StyleSheet.create({
-	header: {
-		flexDirection: 'row',
-		height: 48,
-		paddingHorizontal: 16,
-		borderBottomWidth: StyleSheet.hairlineWidth * 2,
-	},
+  header: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth * 2,
+  },
 });
 
-export default withInternalTheme(DataTableHeader);
+export default DataTableHeader;
 
 // @component-docs ignore-next-line
 export { DataTableHeader };

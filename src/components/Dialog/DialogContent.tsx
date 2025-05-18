@@ -2,22 +2,15 @@ import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
-	/**
-	 * Content of the `DialogContent`.
-	 */
-	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
+  /**
+   * Content of the `DialogContent`.
+   */
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**
  * A component to show content in a Dialog.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/dialog-content.png" />
- *   </figure>
- * </div>
- *
  *
  * ## Usage
  * ```js
@@ -44,18 +37,18 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DialogContent = (props: Props) => (
-	<View {...props} style={[styles.container, props.style]}>
-		{props.children}
-	</View>
+  <View {...props} style={[styles.container, props.style]}>
+    {props.children}
+  </View>
 );
 
 DialogContent.displayName = 'Dialog.Content';
 
 const styles = StyleSheet.create({
-	container: {
-		paddingBottom: 24,
-		paddingHorizontal: 24,
-	},
+  container: {
+    paddingBottom: 24,
+    paddingHorizontal: 24,
+  },
 });
 
 export default DialogContent;

@@ -1,31 +1,33 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
 import { useInternalTheme } from '../../core/theming';
 import Icon, { IconSource } from '../Icon';
 
 export type Props = {
-	/**
-	 *  Custom color for action icon.
-	 */
-	color?: string;
-	/**
-	 * Name of the icon to show.
-	 */
-	icon: IconSource;
-	/**
-	 * Optional icon size.
-	 */
-	size?: number;
+  /**
+   *  Custom color for action icon.
+   */
+  color?: string;
+  /**
+   * Name of the icon to show.
+   */
+  icon: IconSource;
+  /**
+   * Optional icon size.
+   */
+  size?: number;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
  * @supported Available in v5.x with theme version 3
  * A component to show an icon in a Dialog.
- *
- *  <div class="screenshots">
- *   <img class="small" src="screenshots/dialog-icon.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -60,31 +62,36 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const DialogIcon = ({ size = 24, color, icon }: Props) => {
-	const theme = useInternalTheme();
+const DialogIcon = ({
+  size = 24,
+  color,
+  icon,
+  theme: themeOverrides,
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
 
-	if (!theme.isV3) {
-		return null;
-	}
+  if (!theme.isV3) {
+    return null;
+  }
 
-	//@ts-ignore
-	const iconColor = color || theme.colors.secondary;
+  //@ts-ignore
+  const iconColor = color || theme.colors.secondary;
 
-	return (
-		<View style={styles.wrapper}>
-			<Icon source={icon} color={iconColor} size={size} />
-		</View>
-	);
+  return (
+    <View style={styles.wrapper}>
+      <Icon source={icon} color={iconColor} size={size} />
+    </View>
+  );
 };
 
 DialogIcon.displayName = 'Dialog.Icon';
 
 const styles = StyleSheet.create({
-	wrapper: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		paddingTop: 24,
-	},
+  wrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 24,
+  },
 });
 
 export default DialogIcon;

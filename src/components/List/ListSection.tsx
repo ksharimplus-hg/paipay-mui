@@ -1,42 +1,38 @@
 import * as React from 'react';
 import {
-	StyleProp,
-	StyleSheet,
-	TextStyle,
-	View,
-	ViewStyle,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native';
 
 import ListSubheader from './ListSubheader';
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
-	/**
-	 * Title text for the section.
-	 */
-	title?: string;
-	/**
-	 * Content of the section.
-	 */
-	children: React.ReactNode;
-	/**
-	 * @optional
-	 */
-	theme: InternalTheme;
-	/**
-	 * Style that is passed to Title element.
-	 */
-	titleStyle?: StyleProp<TextStyle>;
-	style?: StyleProp<ViewStyle>;
+  /**
+   * Title text for the section.
+   */
+  title?: string;
+  /**
+   * Content of the section.
+   */
+  children: React.ReactNode;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
+  /**
+   * Style that is passed to Title element.
+   */
+  titleStyle?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
 };
 
 /**
  * A component used to group list items.
- *
- * <div class="screenshots">
- *   <img src="screenshots/list-section.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -58,26 +54,34 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const ListSection = ({
-	children,
-	title,
-	titleStyle,
-	style,
-	...rest
-}: Props) => (
-	<View {...rest} style={[styles.container, style]}>
-		{title ? (
-			<ListSubheader style={titleStyle}>{title}</ListSubheader>
-		) : null}
-		{children}
-	</View>
-);
+  children,
+  title,
+  titleStyle,
+  style,
+  theme: themeOverrides,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const viewProps = { ...rest, theme };
+
+  return (
+    <View {...viewProps} style={[styles.container, style]}>
+      {title ? (
+        <ListSubheader style={titleStyle} theme={theme}>
+          {title}
+        </ListSubheader>
+      ) : null}
+      {children}
+    </View>
+  );
+};
 
 ListSection.displayName = 'List.Section';
 
 const styles = StyleSheet.create({
-	container: {
-		marginVertical: 8,
-	},
+  container: {
+    marginVertical: 8,
+  },
 });
 
-export default withInternalTheme(ListSection);
+export default ListSection;

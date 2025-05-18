@@ -1,36 +1,32 @@
 import * as React from 'react';
 
 export type Props = {
-	/**
-	 * Function to execute on selection change.
-	 */
-	onAccordionPress?: (expandedId: string | number) => void;
-	/**
-	 * Id of the currently expanded list accordion
-	 */
-	expandedId?: string | number;
-	/**
-	 * React elements containing list accordions
-	 */
-	children: React.ReactNode;
+  /**
+   * Function to execute on selection change.
+   */
+  onAccordionPress?: (expandedId: string | number) => void;
+  /**
+   * Id of the currently expanded list accordion
+   */
+  expandedId?: string | number;
+  /**
+   * React elements containing list accordions
+   */
+  children: React.ReactNode;
 };
 
 export type ListAccordionGroupContextType = {
-	expandedId: string | number | undefined;
-	onAccordionPress: (expandedId: string | number) => void;
+  expandedId: string | number | undefined;
+  onAccordionPress: (expandedId: string | number) => void;
 } | null;
 
 export const ListAccordionGroupContext =
-	React.createContext<ListAccordionGroupContextType>(null);
+  React.createContext<ListAccordionGroupContextType>(null);
 
 /**
  * List.AccordionGroup allows to control a group of List Accordions. `id` prop for List.Accordion is required in order for group to work.
  * List.AccordionGroup can be a controlled or uncontrolled component. The example shows the uncontrolled version.
  * At most one Accordion can be expanded at a given time.
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-accordion-group.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -61,30 +57,30 @@ export const ListAccordionGroupContext =
  *```
  */
 const ListAccordionGroup = ({
-	expandedId: expandedIdProp,
-	onAccordionPress,
-	children,
+  expandedId: expandedIdProp,
+  onAccordionPress,
+  children,
 }: Props) => {
-	const [expandedId, setExpandedId] = React.useState<
-		string | number | undefined
-	>(undefined);
+  const [expandedId, setExpandedId] = React.useState<
+    string | number | undefined
+  >(undefined);
 
-	const onAccordionPressDefault = (newExpandedId: string | number) => {
-		setExpandedId((currentExpandedId) =>
-			currentExpandedId === newExpandedId ? undefined : newExpandedId
-		);
-	};
+  const onAccordionPressDefault = (newExpandedId: string | number) => {
+    setExpandedId((currentExpandedId) =>
+      currentExpandedId === newExpandedId ? undefined : newExpandedId
+    );
+  };
 
-	return (
-		<ListAccordionGroupContext.Provider
-			value={{
-				expandedId: expandedIdProp || expandedId, // component can be controlled or uncontrolled
-				onAccordionPress: onAccordionPress || onAccordionPressDefault,
-			}}
-		>
-			{children}
-		</ListAccordionGroupContext.Provider>
-	);
+  return (
+    <ListAccordionGroupContext.Provider
+      value={{
+        expandedId: expandedIdProp || expandedId, // component can be controlled or uncontrolled
+        onAccordionPress: onAccordionPress || onAccordionPressDefault,
+      }}
+    >
+      {children}
+    </ListAccordionGroupContext.Provider>
+  );
 };
 
 ListAccordionGroup.displayName = 'List.AccordionGroup';

@@ -1,96 +1,103 @@
 import React from 'react';
 import {
-	Animated,
-	LayoutChangeEvent,
-	StyleProp,
-	StyleSheet,
-	Text,
-	TextStyle,
-	ViewStyle,
+  Animated,
+  DimensionValue,
+  GestureResponderEvent,
+  LayoutChangeEvent,
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { AdornmentSide } from './enums';
-import { withInternalTheme } from '../../../core/theming';
-import type { InternalTheme } from '../../../types';
+import { getTextColor } from './utils';
+import { useInternalTheme } from '../../../core/theming';
+import type { ThemeProp } from '../../../types';
 import { getConstants } from '../helpers';
 
 export type Props = {
-	/**
-	 * Text to show.
-	 */
-	text: string;
-	onLayout?: (event: LayoutChangeEvent) => void;
-	/**
-	 * Style that is passed to the Text element.
-	 */
-	textStyle?: StyleProp<TextStyle>;
-	/**
-	 * @optional
-	 */
-	theme: InternalTheme;
+  /**
+   * Text to show.
+   */
+  text: string;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label for the affix. This is read by the screen reader when the user taps the affix.
+   */
+  accessibilityLabel?: string;
+  /**
+   * Style that is passed to the Text element.
+   */
+  textStyle?: StyleProp<TextStyle>;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 type ContextState = {
-	topPosition: number | null;
-	onLayout?: (event: LayoutChangeEvent) => void;
-	visible?: Animated.Value;
-	textStyle?: StyleProp<TextStyle>;
-	side: AdornmentSide;
-	paddingHorizontal?: number | string;
-	maxFontSizeMultiplier?: number | undefined | null;
-	testID?: string;
+  topPosition: number | null;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  visible?: Animated.Value;
+  textStyle?: StyleProp<TextStyle>;
+  side: AdornmentSide;
+  paddingHorizontal?: DimensionValue;
+  maxFontSizeMultiplier?: number | undefined | null;
+  testID?: string;
+  disabled?: boolean;
 };
 
 const AffixContext = React.createContext<ContextState>({
-	textStyle: { fontFamily: '', color: '' },
-	topPosition: null,
-	side: AdornmentSide.Left,
+  textStyle: { fontFamily: '', color: '' },
+  topPosition: null,
+  side: AdornmentSide.Left,
 });
 
 const AffixAdornment: React.FunctionComponent<
-	{
-		affix: React.ReactNode;
-		testID: string;
-	} & ContextState
+  {
+    affix: React.ReactNode;
+    testID: string;
+  } & ContextState
 > = ({
-	affix,
-	side,
-	textStyle,
-	topPosition,
-	onLayout,
-	visible,
-	paddingHorizontal,
-	maxFontSizeMultiplier,
-	testID,
+  affix,
+  side,
+  textStyle,
+  topPosition,
+  onLayout,
+  visible,
+  paddingHorizontal,
+  maxFontSizeMultiplier,
+  testID,
+  disabled,
 }) => {
-	return (
-		<AffixContext.Provider
-			value={{
-				side,
-				textStyle,
-				topPosition,
-				onLayout,
-				visible,
-				paddingHorizontal,
-				maxFontSizeMultiplier,
-				testID,
-			}}
-		>
-			{affix}
-		</AffixContext.Provider>
-	);
+  return (
+    <AffixContext.Provider
+      value={{
+        side,
+        textStyle,
+        topPosition,
+        onLayout,
+        visible,
+        paddingHorizontal,
+        maxFontSizeMultiplier,
+        testID,
+        disabled,
+      }}
+    >
+      {affix}
+    </AffixContext.Provider>
+  );
 };
 
 /**
  * A component to render a leading / trailing text in the TextInput
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/textinput-outline.affix.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -114,73 +121,92 @@ const AffixAdornment: React.FunctionComponent<
  * ```
  */
 
-const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
-	const { AFFIX_OFFSET } = getConstants(theme.isV3);
+const TextInputAffix = ({
+  text,
+  textStyle: labelStyle,
+  theme: themeOverrides,
+  onLayout: onTextLayout,
+  onPress,
+  accessibilityLabel = text,
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const { AFFIX_OFFSET } = getConstants(theme.isV3);
 
-	const {
-		textStyle,
-		onLayout,
-		topPosition,
-		side,
-		visible,
-		paddingHorizontal,
-		maxFontSizeMultiplier,
-		testID,
-	} = React.useContext(AffixContext);
+  const {
+    textStyle,
+    onLayout,
+    topPosition,
+    side,
+    visible,
+    paddingHorizontal,
+    maxFontSizeMultiplier,
+    testID,
+    disabled,
+  } = React.useContext(AffixContext);
 
-	const textColor = color(
-		theme.isV3 ? theme.colors.onSurface : theme.colors?.text
-	)
-		.alpha(theme.dark ? 0.7 : 0.54)
-		.rgb()
-		.string();
+  const offset =
+    typeof paddingHorizontal === 'number' ? paddingHorizontal : AFFIX_OFFSET;
 
-	const offset =
-		typeof paddingHorizontal === 'number'
-			? paddingHorizontal
-			: AFFIX_OFFSET;
+  const style = {
+    top: topPosition,
+    [side]: offset,
+  } as ViewStyle;
 
-	const style = {
-		top: topPosition,
-		[side]: offset,
-	} as ViewStyle;
+  const textColor = getTextColor({ theme, disabled });
 
-	return (
-		<Animated.View
-			style={[
-				styles.container,
-				style,
-				{
-					opacity:
-						visible?.interpolate({
-							inputRange: [0, 1],
-							outputRange: [1, 0],
-						}) || 1,
-				},
-			]}
-			onLayout={onLayout}
-			testID={testID}
-		>
-			<Text
-				maxFontSizeMultiplier={maxFontSizeMultiplier}
-				style={[{ color: textColor }, textStyle, labelStyle]}
-			>
-				{text}
-			</Text>
-		</Animated.View>
-	);
+  const content = (
+    <Text
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
+      style={[{ color: textColor }, textStyle, labelStyle]}
+      onLayout={onTextLayout}
+      testID={`${testID}-text`}
+    >
+      {text}
+    </Text>
+  );
+
+  return (
+    <Animated.View
+      style={[
+        styles.container,
+        style,
+        {
+          opacity:
+            visible?.interpolate({
+              inputRange: [0, 1],
+              outputRange: [1, 0],
+            }) || 1,
+        },
+      ]}
+      onLayout={onLayout}
+      testID={testID}
+    >
+      {onPress ? (
+        <Pressable
+          onPress={onPress}
+          accessibilityRole="button"
+          accessibilityLabel={accessibilityLabel}
+        >
+          {content}
+        </Pressable>
+      ) : (
+        content
+      )}
+    </Animated.View>
+  );
 };
+
 TextInputAffix.displayName = 'TextInput.Affix';
 
 const styles = StyleSheet.create({
-	container: {
-		position: 'absolute',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
+  container: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
-export default withInternalTheme(TextInputAffix);
+export default TextInputAffix;
 
 // @component-docs ignore-next-line
 export { TextInputAffix, AffixAdornment };

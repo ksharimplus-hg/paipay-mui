@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {
-	StyleSheet,
-	StyleProp,
-	ViewStyle,
-	TextStyle,
-	GestureResponderEvent,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  GestureResponderEvent,
 } from 'react-native';
 
 import type { $RemoveChildren } from '../../types';
@@ -12,34 +12,35 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
-	/**
-	 * Content of the `DataTableCell`.
-	 */
-	children: React.ReactNode;
-	/**
-	 * Align the text to the right. Generally monetary or number fields are aligned to right.
-	 */
-	numeric?: boolean;
-	/**
-	 * Function to execute on press.
-	 */
-	onPress?: (e: GestureResponderEvent) => void;
-	style?: StyleProp<ViewStyle>;
-	/**
-	 * Text content style of the `DataTableCell`.
-	 */
-	textStyle?: StyleProp<TextStyle>;
+  /**
+   * Content of the `DataTableCell`.
+   */
+  children: React.ReactNode;
+  /**
+   * Align the text to the right. Generally monetary or number fields are aligned to right.
+   */
+  numeric?: boolean;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: (e: GestureResponderEvent) => void;
+  style?: StyleProp<ViewStyle>;
+  /**
+   * Text content style of the `DataTableCell`.
+   */
+  textStyle?: StyleProp<TextStyle>;
+  /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
  * A component to show a single cell inside of a table.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-row-cell.png" />
- *   </figure>
- * </div>
- *
  *
  * ## Usage
  * ```js
@@ -60,37 +61,72 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * If you want to support multiline text, please use View instead, as multiline text doesn't comply with
  * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-
 const DataTableCell = ({
-	children,
-	textStyle,
-	style,
-	numeric,
-	...rest
-}: Props) => (
-	<TouchableRipple
-		{...rest}
-		style={[styles.container, numeric && styles.right, style]}
-	>
-		<Text style={textStyle} numberOfLines={1}>
-			{children}
-		</Text>
-	</TouchableRipple>
-);
+  children,
+  textStyle,
+  style,
+  numeric,
+  maxFontSizeMultiplier,
+  testID,
+  ...rest
+}: Props) => {
+  return (
+    <TouchableRipple
+      {...rest}
+      testID={testID}
+      style={[styles.container, numeric && styles.right, style]}
+    >
+      <CellContent
+        textStyle={textStyle}
+        testID={testID}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
+        {children}
+      </CellContent>
+    </TouchableRipple>
+  );
+};
+
+const CellContent = ({
+  children,
+  textStyle,
+  maxFontSizeMultiplier,
+  testID,
+}: Pick<
+  Props,
+  'children' | 'textStyle' | 'testID' | 'maxFontSizeMultiplier'
+>) => {
+  if (React.isValidElement(children)) {
+    return children;
+  }
+
+  return (
+    <Text
+      style={textStyle}
+      numberOfLines={1}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
+      testID={`${testID}-text-container`}
+    >
+      {children}
+    </Text>
+  );
+};
 
 DataTableCell.displayName = 'DataTable.Cell';
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 
-	right: {
-		justifyContent: 'flex-end',
-	},
+  right: {
+    justifyContent: 'flex-end',
+  },
 });
 
 export default DataTableCell;

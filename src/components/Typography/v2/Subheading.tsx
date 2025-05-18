@@ -4,13 +4,14 @@ import { Text, TextStyle, StyleSheet, StyleProp } from 'react-native';
 import StyledText from './StyledText';
 
 export type Props = React.ComponentProps<typeof Text> & {
-	style?: StyleProp<TextStyle>;
-	children: React.ReactNode;
+  style?: StyleProp<TextStyle>;
+  children: React.ReactNode;
 };
 
 // @component-group Typography
 
 /**
+ * @deprecated Deprecated in v5.x - use `<Text variant="titleMedium" />` instead.
  * Typography component for showing a subheading.
  *
  * <div class="screenshots">
@@ -30,21 +31,21 @@ export type Props = React.ComponentProps<typeof Text> & {
  * ```
  */
 const Subheading = (props: Props) => (
-	<StyledText
-		{...props}
-		alpha={0.87}
-		family="regular"
-		style={[styles.text, props.style]}
-	/>
+  <StyledText
+    {...props}
+    alpha={0.87}
+    family="regular"
+    style={[styles.text, props.style]}
+  />
 );
 
 export default Subheading;
 
 const styles = StyleSheet.create({
-	text: {
-		fontSize: 16,
-		lineHeight: 24,
-		marginVertical: 2,
-		letterSpacing: 0.5,
-	},
+  text: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginVertical: 2,
+    letterSpacing: 0.5,
+  },
 });

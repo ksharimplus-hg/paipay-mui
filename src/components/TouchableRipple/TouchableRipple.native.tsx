@@ -1,116 +1,145 @@
 import * as React from 'react';
 import {
-	PressableAndroidRippleConfig,
-	StyleProp,
-	Platform,
-	ViewStyle,
-	StyleSheet,
-	Pressable,
-	GestureResponderEvent,
+  PressableAndroidRippleConfig,
+  StyleProp,
+  Platform,
+  ViewStyle,
+  StyleSheet,
+  GestureResponderEvent,
+  View,
+  ColorValue,
 } from 'react-native';
 
+import type { PressableProps } from './Pressable';
+import { Pressable } from './Pressable';
 import { getTouchableRippleColors } from './utils';
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { Settings, SettingsContext } from '../../core/settings';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
 
-type Props = React.ComponentProps<typeof Pressable> & {
-	borderless?: boolean;
-	background?: PressableAndroidRippleConfig;
-	disabled?: boolean;
-	onPress?: (e: GestureResponderEvent) => void | null;
-	rippleColor?: string;
-	underlayColor?: string;
-	children: React.ReactNode;
-	style?: StyleProp<ViewStyle>;
-	theme: InternalTheme;
+export type Props = PressableProps & {
+  borderless?: boolean;
+  background?: PressableAndroidRippleConfig;
+  centered?: boolean;
+  disabled?: boolean;
+  onPress?: (e: GestureResponderEvent) => void | null;
+  onLongPress?: (e: GestureResponderEvent) => void;
+  onPressIn?: (e: GestureResponderEvent) => void;
+  onPressOut?: (e: GestureResponderEvent) => void;
+  rippleColor?: ColorValue;
+  underlayColor?: string;
+  children: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+  theme?: ThemeProp;
 };
 
-const TouchableRipple = ({
-	style,
-	background,
-	borderless = false,
-	disabled: disabledProp,
-	rippleColor,
-	underlayColor,
-	children,
-	theme,
-	...rest
-}: Props) => {
-	const [showUnderlay, setShowUnderlay] = React.useState<boolean>(false);
+const TouchableRipple = (
+  {
+    style,
+    background,
+    borderless = false,
+    disabled: disabledProp,
+    rippleColor,
+    underlayColor,
+    children,
+    theme: themeOverrides,
+    ...rest
+  }: Props,
+  ref: React.ForwardedRef<View>
+) => {
+  const theme = useInternalTheme(themeOverrides);
+  const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
-	const disabled = disabledProp || !rest.onPress;
-	const { calculatedRippleColor, calculatedUnderlayColor } =
-		getTouchableRippleColors({
-			theme,
-			rippleColor,
-			underlayColor,
-		});
+  const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
-	// A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
-	// https://github.com/facebook/react-native/issues/6480
-	const useForeground =
-		Platform.OS === 'android' &&
-		Platform.Version >= ANDROID_VERSION_PIE &&
-		borderless;
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
 
-	const handlePressIn = (e: GestureResponderEvent) => {
-		setShowUnderlay(true);
-		rest.onPressIn?.(e);
-	};
+  const disabled = disabledProp || !hasPassedTouchHandler;
 
-	const handlePressOut = (e: GestureResponderEvent) => {
-		setShowUnderlay(false);
-		rest.onPressOut?.(e);
-	};
+  const { calculatedRippleColor, calculatedUnderlayColor } =
+    getTouchableRippleColors({
+      theme,
+      rippleColor,
+      underlayColor,
+    });
 
-	if (TouchableRipple.supported) {
-		return (
-			<Pressable
-				{...rest}
-				disabled={disabled}
-				style={[borderless && styles.overflowHidden, style]}
-				android_ripple={
-					background != null
-						? background
-						: {
-								color: calculatedRippleColor,
-								borderless,
-								foreground: useForeground,
-						  }
-				}
-			>
-				{React.Children.only(children)}
-			</Pressable>
-		);
-	}
+  // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
+  // https://github.com/facebook/react-native/issues/6480
+  const useForeground =
+    Platform.OS === 'android' &&
+    Platform.Version >= ANDROID_VERSION_PIE &&
+    borderless;
 
-	return (
-		<Pressable
-			{...rest}
-			disabled={disabled}
-			style={[
-				borderless && styles.overflowHidden,
-				showUnderlay && { backgroundColor: calculatedUnderlayColor },
-				style,
-			]}
-			onPressIn={handlePressIn}
-			onPressOut={handlePressOut}
-		>
-			{React.Children.only(children)}
-		</Pressable>
-	);
+  if (TouchableRipple.supported) {
+    const androidRipple = rippleEffectEnabled
+      ? background ?? {
+          color: calculatedRippleColor,
+          borderless,
+          foreground: useForeground,
+        }
+      : undefined;
+
+    return (
+      <Pressable
+        {...rest}
+        ref={ref}
+        disabled={disabled}
+        style={[borderless && styles.overflowHidden, style]}
+        android_ripple={androidRipple}
+      >
+        {React.Children.only(children)}
+      </Pressable>
+    );
+  }
+
+  return (
+    <Pressable
+      {...rest}
+      ref={ref}
+      disabled={disabled}
+      style={[borderless && styles.overflowHidden, style]}
+    >
+      {({ pressed }) => (
+        <>
+          {pressed && rippleEffectEnabled && (
+            <View
+              testID="touchable-ripple-underlay"
+              style={[
+                styles.underlay,
+                { backgroundColor: calculatedUnderlayColor },
+              ]}
+            />
+          )}
+          {React.Children.only(children)}
+        </>
+      )}
+    </Pressable>
+  );
 };
 
 TouchableRipple.supported =
-	Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+  Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
 
 const styles = StyleSheet.create({
-	overflowHidden: {
-		overflow: 'hidden',
-	},
+  overflowHidden: {
+    overflow: 'hidden',
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 2,
+  },
 });
 
-export default withInternalTheme(TouchableRipple);
+const Component = forwardRef(TouchableRipple);
+
+export default Component as typeof Component & { supported: boolean };

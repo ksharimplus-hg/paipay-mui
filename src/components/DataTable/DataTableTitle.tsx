@@ -1,66 +1,61 @@
 import * as React from 'react';
 import {
-	Animated,
-	GestureResponderEvent,
-	I18nManager,
-	StyleProp,
-	StyleSheet,
-	TextStyle,
-	TouchableWithoutFeedback,
-	View,
-	ViewStyle,
+  Animated,
+  GestureResponderEvent,
+  I18nManager,
+  PixelRatio,
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<
-	typeof TouchableWithoutFeedback
-> & {
-	/**
-	 * Text content of the `DataTableTitle`.
-	 */
-	children: React.ReactNode;
-	/**
-	 * Align the text to the right. Generally monetary or number fields are aligned to right.
-	 */
-	numeric?: boolean;
-	/**
-	 * Direction of sorting. An arrow indicating the direction is displayed when this is given.
-	 */
-	sortDirection?: 'ascending' | 'descending';
-	/**
-	 * The number of lines to show.
-	 */
-	numberOfLines?: number;
-	/**
-	 * Function to execute on press.
-	 */
-	onPress?: (e: GestureResponderEvent) => void;
-	style?: StyleProp<ViewStyle>;
-	/**
-	 * Text content style of the `DataTableTitle`.
-	 */
-	textStyle?: StyleProp<TextStyle>;
-	/**
-	 * @optional
-	 */
-	theme: InternalTheme;
+export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
+  /**
+   * Text content of the `DataTableTitle`.
+   */
+  children: React.ReactNode;
+  /**
+   * Align the text to the right. Generally monetary or number fields are aligned to right.
+   */
+  numeric?: boolean;
+  /**
+   * Direction of sorting. An arrow indicating the direction is displayed when this is given.
+   */
+  sortDirection?: 'ascending' | 'descending';
+  /**
+   * The number of lines to show.
+   */
+  numberOfLines?: number;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: (e: GestureResponderEvent) => void;
+  style?: StyleProp<ViewStyle>;
+  /**
+   * Text content style of the `DataTableTitle`.
+   */
+  textStyle?: StyleProp<TextStyle>;
+  /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
  * A component to display title in table header.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-header.png" />
- *   </figure>
- * </div>
- *
  *
  * ## Usage
  * ```js
@@ -86,128 +81,128 @@ export type Props = React.ComponentPropsWithRef<
  */
 
 const DataTableTitle = ({
-	numeric,
-	children,
-	onPress,
-	sortDirection,
-	theme,
-	textStyle,
-	style,
-	numberOfLines = 1,
-	...rest
+  numeric,
+  children,
+  onPress,
+  sortDirection,
+  textStyle,
+  style,
+  theme: themeOverrides,
+  numberOfLines = 1,
+  maxFontSizeMultiplier,
+  ...rest
 }: Props) => {
-	const { current: spinAnim } = React.useRef<Animated.Value>(
-		new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
-	);
+  const theme = useInternalTheme(themeOverrides);
+  const { current: spinAnim } = React.useRef<Animated.Value>(
+    new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
+  );
 
-	React.useEffect(() => {
-		Animated.timing(spinAnim, {
-			toValue: sortDirection === 'ascending' ? 0 : 1,
-			duration: 150,
-			useNativeDriver: true,
-		}).start();
-	}, [sortDirection, spinAnim]);
+  React.useEffect(() => {
+    Animated.timing(spinAnim, {
+      toValue: sortDirection === 'ascending' ? 0 : 1,
+      duration: 150,
+      useNativeDriver: true,
+    }).start();
+  }, [sortDirection, spinAnim]);
 
-	const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
+  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
 
-	const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
+  const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
 
-	const spin = spinAnim.interpolate({
-		inputRange: [0, 1],
-		outputRange: ['0deg', '180deg'],
-	});
+  const spin = spinAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '180deg'],
+  });
 
-	const icon = sortDirection ? (
-		<Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
-			<MaterialCommunityIcon
-				name="arrow-up"
-				size={16}
-				color={textColor}
-				direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
-			/>
-		</Animated.View>
-	) : null;
+  const icon = sortDirection ? (
+    <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
+      <MaterialCommunityIcon
+        name="arrow-up"
+        size={16}
+        color={textColor}
+        direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+      />
+    </Animated.View>
+  ) : null;
 
-	return (
-		<TouchableWithoutFeedback
-			disabled={!onPress}
-			onPress={onPress}
-			{...rest}
-		>
-			<View style={[styles.container, numeric && styles.right, style]}>
-				{icon}
+  return (
+    <Pressable
+      disabled={!onPress}
+      onPress={onPress}
+      {...rest}
+      style={[styles.container, numeric && styles.right, style]}
+    >
+      {icon}
 
-				<Text
-					style={[
-						styles.cell,
-						// height must scale with numberOfLines
-						{ maxHeight: 24 * numberOfLines },
-						// if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
-						numberOfLines > 1
-							? numeric
-								? I18nManager.getConstants().isRTL
-									? styles.leftText
-									: styles.rightText
-								: styles.centerText
-							: {},
-						sortDirection
-							? styles.sorted
-							: { color: alphaTextColor },
-						textStyle,
-					]}
-					numberOfLines={numberOfLines}
-				>
-					{children}
-				</Text>
-			</View>
-		</TouchableWithoutFeedback>
-	);
+      <Text
+        style={[
+          styles.cell,
+          // height must scale with numberOfLines
+          { maxHeight: 24 * PixelRatio.getFontScale() * numberOfLines },
+          // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
+          numberOfLines > 1
+            ? numeric
+              ? I18nManager.getConstants().isRTL
+                ? styles.leftText
+                : styles.rightText
+              : styles.centerText
+            : {},
+          sortDirection ? styles.sorted : { color: alphaTextColor },
+          textStyle,
+        ]}
+        numberOfLines={numberOfLines}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
+        {children}
+      </Text>
+    </Pressable>
+  );
 };
 
 DataTableTitle.displayName = 'DataTable.Title';
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		flexDirection: 'row',
-		alignContent: 'center',
-		paddingVertical: 12,
-	},
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignContent: 'center',
+    paddingVertical: 12,
+  },
 
-	rightText: {
-		textAlign: 'right',
-	},
+  rightText: {
+    textAlign: 'right',
+  },
 
-	leftText: {
-		textAlign: 'left',
-	},
+  leftText: {
+    textAlign: 'left',
+  },
 
-	centerText: {
-		textAlign: 'center',
-	},
+  centerText: {
+    textAlign: 'center',
+  },
 
-	right: {
-		justifyContent: 'flex-end',
-	},
+  right: {
+    justifyContent: 'flex-end',
+  },
 
-	cell: {
-		lineHeight: 24,
-		fontSize: 12,
-		fontWeight: '500',
-		alignItems: 'center',
-	},
+  cell: {
+    lineHeight: 24,
+    fontSize: 12,
+    fontWeight: '500',
+    alignItems: 'center',
+  },
 
-	sorted: {
-		marginLeft: 8,
-	},
+  sorted: {
+    marginLeft: 8,
+  },
 
-	icon: {
-		height: 24,
-		justifyContent: 'center',
-	},
+  icon: {
+    height: 24,
+    justifyContent: 'center',
+  },
 });
 
-export default withInternalTheme(DataTableTitle);
+export default DataTableTitle;
 
 // @component-docs ignore-next-line
 export { DataTableTitle };
